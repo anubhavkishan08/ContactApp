@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Contact</title>
+    <link rel="stylesheet" href="/css/deletecontact.css">
+    <script>
+        function deleteContact(event) {
+            event.preventDefault();
+
+             // Confirm the action with the user
+            const confirmation = confirm("Are you sure you want to delete this contact?");
+            if (!confirmation) {
+                return; // Exit if the user does not confirm
+            }
+
+            const contactId = document.getElementById('contactId').value;
+            const url = `http://localhost:8080/delete-contact/${contactId}`;
+
+            fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                     alert('Contact deleted successfully!');
+                    window.location.href = "/html/viewcontacts.html"; // Redirect to success page
+                } else {
+                    window.location.href = "/html/deleteerror.html"; // Redirect to error page
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                window.location.href = "/html/error.html"; // Redirect to error page
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="delete-container">
+    <h2>Delete Contact</h2>
+    <form id="deleteForm" onsubmit="deleteContact(event)">
+        <div class="input-group">
+            <label for="contactId">Contact ID</label>
+            <input type="text" id="contactId" name="contactId" required>
+        </div>
+        <button type="submit" class="delete-button">Delete Contact</button>
+    </form>
+</div>
+</body>
+</html>

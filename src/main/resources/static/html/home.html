@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="/css/homestyle.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Ensure the element exists before trying to modify it
+            const greetingElement = document.getElementById('greeting');
+            if (greetingElement) {
+                // Fetch the logged-in username
+                fetch('http://localhost:8080/current-username')
+                    .then(response => response.text())
+                    .then(username => {
+                        greetingElement.textContent = `Hi, ${username}!`;
+                    })
+                    .catch(error => console.error('Error fetching username:', error));
+            } else {
+                console.error('Greeting element not found.');
+            }
+        });
+    </script>
+</head>
+<body class="background">
+<nav class="navbar">
+    <ul class="navbar-menu">
+        <li><a href="home.html" class="navbar-item">Home</a></li>
+        <li><a href="viewcontacts.html" class="navbar-item">View Contacts</a></li>
+        <li><a href="addcontact.html" class="navbar-item">Add Contact</a></li>
+        <li><a href="updatecontact.html" class="navbar-item">Update Contact</a></li>
+        <li><a href="deletecontact.html" class="navbar-item">Delete Contact</a></li>
+        <li><a href="/logout" class="navbar-item">Logout</a></li>
+    </ul>
+</nav>
+<div class="container">
+    <h1 id="greeting">Welcome to the Contact Application</h1>
+    <p class="intro-text">Please choose an option:</p>
+    <ul class="button-list">
+        <li><a href="viewcontacts.html" class="button">View Contacts</a></li>
+        <li><a href="addcontact.html" class="button">Add Contact</a></li>
+        <li><a href="updatecontact.html" class="button">Update Contact</a></li>
+        <li><a href="deletecontact.html" class="button">Delete Contact</a></li>
+        <li><a href="/logout" class="button">Logout</a></li>
+    </ul>
+</div>
+</body>
+</html>

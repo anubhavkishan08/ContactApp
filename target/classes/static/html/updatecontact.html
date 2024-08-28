@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Contact</title>
+    <link rel="stylesheet" href="/css/updatecontact.css">
+    <script>
+        function updateContact(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const contactId = document.getElementById('contactId').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const facebook = document.getElementById('facebook').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const mobno = document.getElementById('mobno').value;
+
+            const data = {
+                name: name,
+                emailId: email,
+                fbId: facebook,
+                linkedinId: linkedin,
+                mobNo: mobno
+            };
+
+            fetch(`/update-contact/${contactId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Contact updated successfully!');
+                    window.location.href = '/html/viewcontacts.html'; // Redirect after successful update
+                } else {
+                    alert('Failed to update contact. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error updating contact.');
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="update-container">
+    <h2>Update Contact</h2>
+    <form id="updateForm" onsubmit="updateContact(event)">
+        <div class="input-group">
+            <label for="contactId">Contact ID</label>
+            <input type="text" id="contactId" name="contactId" required>
+        </div>
+        <div class="input-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="input-group">
+            <label for="facebook">Facebook ID</label>
+            <input type="text" id="facebook" name="facebook">
+        </div>
+        <div class="input-group">
+            <label for="linkedin">LinkedIn ID</label>
+            <input type="text" id="linkedin" name="linkedin">
+        </div>
+        <div class="input-group">
+            <label for="mobno">Mobile Number</label>
+            <input type="text" id="mobno" name="mobno">
+        </div>
+        <button type="submit" class="update-button">Update Contact</button>
+    </form>
+</div>
+</body>
+</html>

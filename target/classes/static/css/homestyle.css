@@ -1,0 +1,86 @@
+body.background {
+    font-family: Arial, sans-serif;
+    /*background: url('/images/background.jpg') no-repeat center center fixed;*/
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background for navbar */
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.navbar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-item {
+    text-decoration: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navbar-item:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+.container {
+    max-width: 600px;
+    margin: 100px auto 0; /* Added top margin to account for navbar */
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333; /* Darker text color for readability */
+}
+
+.intro-text {
+    font-size: 1.2em;
+    margin: 20px 0; /* Space above and below the paragraph */
+    color: #333; /* Darker text color for readability */
+}
+
+.button-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.button-list li {
+    margin-bottom: 10px; /* Space between the buttons */
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745; /* New background color */
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #218838; /* Darker shade for hover */
+}

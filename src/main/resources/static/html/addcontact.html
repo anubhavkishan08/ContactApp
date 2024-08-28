@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact</title>
+    <link rel="stylesheet" href="/css/contactstyle.css">
+    <script>
+        function addContact(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = event.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.disabled = true; // Disable the submit button to prevent multiple clicks
+
+            const formData = new FormData(form);
+
+            fetch('http://localhost:8080/add', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Contact added successfully!');
+                    form.reset(); // Clear the form data
+                    window.location.href = '/html/viewcontacts.html'; // Redirect after successful addition
+                } else {
+                    alert('Failed to add contact. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error adding contact.');
+            })
+            .finally(() => {
+                submitButton.disabled = false; // Re-enable the submit button after the request is complete
+            });
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h2>Add Contact</h2>
+    <form id="contactForm" onsubmit="addContact(event)" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="facebook">Facebook ID</label>
+            <input type="text" id="facebook" name="facebook">
+        </div>
+        <div class="form-group">
+            <label for="linkedin">LinkedIn ID</label>
+            <input type="text" id="linkedin" name="linkedin">
+        </div>
+        <div class="form-group">
+            <label for="mobno">Mobile Number</label>
+            <input type="tel" id="mobno" name="mobno" pattern="[0-9]{10}" required>
+        </div>
+        <!-- Uncomment if image upload is needed -->
+        <!-- <div class="form-group">
+            <label for="image">Upload Image</label>
+            <input type="file" id="image" name="image" accept="image/*">
+        </div> -->
+        <button type="submit">Add Contact</button>
+       <!-- <button type="button" onclick="window.location.href = '/html/viewcontacts.html'">Show Contacts</button>-->
+    </form>
+</div>
+</body>
+</html>

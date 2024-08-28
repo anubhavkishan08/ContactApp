@@ -1,0 +1,10 @@
+com\security\ContactApp\dto\UserDetailDTO.class
+com\security\ContactApp\dao\User_Registration.class
+com\security\ContactApp\security\SecurityConfig.class
+com\security\ContactApp\repository\RegistrationRepository.class
+com\security\ContactApp\security\WebConfig.class
+com\security\ContactApp\ContactAppApplication.class
+com\security\ContactApp\repository\UserDetailsRepository.class
+com\security\ContactApp\dao\User_Details.class
+com\security\ContactApp\controller\DemoController.class
+com\security\ContactApp\service\CustomUserDetailsService.class

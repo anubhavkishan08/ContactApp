@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="/css/viewcontacts.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Fetch the logged-in username
+            fetch('http://localhost:8080/current-username')
+                .then(response => response.text())
+                .then(username => {
+                    document.getElementById('greeting').textContent = `Hi, ${username}!`;
+                })
+                .catch(error => console.error('Error fetching username:', error));
+
+            // Fetch user details
+            fetch('http://localhost:8080/user-details')
+                .then(response => {
+                    console.log('Response:', response);
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data:', data);
+                    const tableBody = document.getElementById('user-details-body');
+                    data.forEach(detail => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${detail.id}</td>
+                            <td>${detail.name}</td>
+                            <td>${detail.emailId}</td>
+                            <td>${detail.facebookId}</td>
+                            <td>${detail.linkedInId}</td>
+                            <td>${detail.mobileNumber}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching user details:', error));
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1 id="greeting">User Details</h1>
+
+    <!-- Navigation Buttons -->
+    <div class="button-group">
+        <form action="http://localhost:8080/html/home.html" method="get" class="home-form">
+            <button type="submit" class="home-button">Home</button>
+        </form>
+        <form action="/logout" method="post" class="logout-form">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
+
+    <!-- User Details Table -->
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Facebook ID</th>
+            <th>LinkedIn ID</th>
+            <th>Mobile Number</th>
+        </tr>
+        </thead>
+        <tbody id="user-details-body">
+        <!-- Rows will be added here by JavaScript -->
+        </tbody>
+    </table>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <button class="action-button add-button" onclick="window.location.href = 'addcontact.html';">Add Contact</button>
+        <button class="action-button update-button" onclick="window.location.href = 'updatecontact.html';">Update Contact</button>
+        <button class="action-button delete-button" onclick="window.location.href = 'deletecontact.html';">Delete Contact</button>
+    </div>
+</div>
+</body>
+</html>
